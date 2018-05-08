@@ -25,18 +25,16 @@ FROM nvidia/cuda:9.0-cudnn7-devel as cudabuilder
 FROM dockcross/linux-arm64
 
 ENV ARCH aarch64
-ENV FC /usr/bin/${CROSS_TRIPLE}-gfortran
 ENV HOSTCC gcc
 ENV TARGET ARMV8
 
 WORKDIR /work
 
 # Build OpenBLAS
-ADD https://api.github.com/repos/xianyi/OpenBLAS/git/refs/tags/v0.2.20 openblas_version.json
 RUN git clone --recursive -b v0.2.20 https://github.com/xianyi/OpenBLAS.git && \
     cd OpenBLAS && \
     make -j$(nproc) && \
-    PREFIX=${CROSS_ROOT} make install
+    make PREFIX=$CROSS_ROOT install
 
 # Setup CUDA build env (including configuring and copying nvcc)
 COPY --from=cudabuilder /usr/local/cuda /usr/local/cuda
