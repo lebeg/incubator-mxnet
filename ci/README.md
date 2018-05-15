@@ -69,3 +69,23 @@ For all builds a directory from the host system is mapped where ccache will stor
 compiled object files (defaults to /tmp/ci_ccache). This will speed up rebuilds 
 significantly. You can set this directory explicitly by setting CCACHE_DIR environment 
 variable. All ccache instances are currently set to be 10 Gigabytes max in size.
+
+## test.py
+
+This utility is used to test cross compiled binaries in an emulated environment. 
+Artifacts are taken from build/ directory, installed on a docker container with 
+emulated target system architecture and the test suite is being run.
+
+A set of helper shell functions are in `docker/runtime_test_functions.sh`.
+`test.py` without arguments or `test.py --help` will display usage
+information about the tool.
+
+To test the armv7 artifact for example:
+
+```
+./test.py -p armv7
+```
+
+The artifacts being tested are installed from the build/ directory in the project 
+root. In case `test.py -a` is invoked, the artifacts are taken from build.<platform>/
+
