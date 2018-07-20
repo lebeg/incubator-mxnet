@@ -80,7 +80,7 @@ mxnet_option(USE_TENSORRT         "Enable infeference optimization with TensorRT
 # * MKL
 # * Apple
 #
-# See cmake/ChooseBlas.cmake file for the options.
+# See cmake/ChooseBLAS.cmake file for the options.
 #
 # Intel's MKL (Math Kernel Library) is one of the most powerful math libraries
 # https://software.intel.com/en-us/mkl
@@ -158,7 +158,7 @@ if("$ENV{VERBOSE}" STREQUAL "1")
 endif()
 
 # ---[ BLAS
-include(cmake/ChooseBlas.cmake)
+include(cmake/ChooseBLAS.cmake)
 
 if(USE_CUDA AND NOT USE_OLDCMAKECUDA)
   message(STATUS "CMake version '${CMAKE_VERSION}' using generator '${CMAKE_GENERATOR}'")
