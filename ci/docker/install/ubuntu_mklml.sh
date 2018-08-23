@@ -24,10 +24,6 @@ cd /tmp
 wget --no-check-certificate https://github.com/intel/mkl-dnn/releases/download/v0.14/mklml_lnx_2018.0.3.20180406.tgz
 tar -zxvf mklml_lnx_2018.0.3.20180406.tgz
 
-# do not include Intel OpenMP or it will conflict with GNU OpenMP (MKLDNN cmake files search for it)
-rm -rf mklml_lnx_2018.0.3.20180406/lib/libiomp5.so
-rm -rf mklml_lnx_2018.0.3.20180406/lib/libmklml_intel.so
-
 cp -rf mklml_*/* /usr/local/ && rm -rf mklml_*
 
 popd
