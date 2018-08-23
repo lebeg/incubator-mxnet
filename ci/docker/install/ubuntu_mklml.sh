@@ -21,8 +21,8 @@ set -ex
 pushd .
 
 cd /tmp
-wget --no-check-certificate https://github.com/intel/mkl-dnn/releases/download/v0.14/mklml_lnx_2018.0.3.20180406.tgz
-tar -zxvf mklml_lnx_2018.0.3.20180406.tgz
+wget --no-check-certificate https://github.com/intel/mkl-dnn/releases/download/v0.16/mklml_lnx_2019.0.20180710.tgz
+tar -zxvf mklml_lnx_2019.0.20180710.tgz
 
 cp -rf mklml_*/* /usr/local/ && rm -rf mklml_*
 
