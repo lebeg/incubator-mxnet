@@ -20,6 +20,7 @@ import mxnet as mx
 from mxnet.test_utils import *
 from mxnet.base import MXNetError
 import numpy as np
+import operator
 import os
 import gzip
 import pickle as pickle
@@ -337,7 +338,7 @@ def test_CSVIter():
     for dtype in ['int32', 'int64', 'float32']:
         check_CSVIter_synthetic(dtype=dtype)
 
-@unittest.skip("Flaky test: https://github.com/apache/incubator-mxnet/issues/11359")
+
 def test_ImageRecordIter_seed_augmentation():
     get_cifar10()
     seed_aug = 3
@@ -380,7 +381,7 @@ def test_ImageRecordIter_seed_augmentation():
         seed_aug=seed_aug)
     batch = dataiter.next()
     data2 = batch.data[0].asnumpy().astype(np.uint8)
-    assert(np.array_equal(data,data2))
+    np.assert_array_compare(operator.__eq__, data, data2)
 
     # check whether to get different images after change seed_aug
     dataiter = mx.io.ImageRecordIter(
@@ -398,10 +399,10 @@ def test_ImageRecordIter_seed_augmentation():
         random_s=40,
         random_h=10,
         max_shear_ratio=2,
-        seed_aug=seed_aug+1)
+        seed_aug=seed_aug + 1)
     batch = dataiter.next()
     data2 = batch.data[0].asnumpy().astype(np.uint8)
-    assert(not np.array_equal(data,data2))
+    np.assert_array_compare(operator.__ne__, data, data2)
 
     # check whether seed_aug changes the iterator behavior
     dataiter = mx.io.ImageRecordIter(
@@ -423,7 +424,8 @@ def test_ImageRecordIter_seed_augmentation():
         seed_aug=seed_aug)
     batch = dataiter.next()
     data2 = batch.data[0].asnumpy().astype(np.uint8)
-    assert(np.array_equal(data,data2))
+    np.assert_array_compare(operator.__eq__, data, data2)
+
 
 if __name__ == "__main__":
     test_NDArrayIter()
