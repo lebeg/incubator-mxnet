@@ -742,23 +742,23 @@ if(USE_PLUGINS_WARPCTC)
 endif()
 
 
-if(USE_OPENCV AND OpenCV_VERSION_MAJOR GREATER 2)
-  add_executable(im2rec "tools/im2rec.cc")
-  if(MSVC)
-    target_link_libraries(im2rec mxnet)
-  else()
-    target_link_libraries(im2rec ${BEGIN_WHOLE_ARCHIVE} mxnet_static ${END_WHOLE_ARCHIVE})
-  endif()
-  target_link_libraries(im2rec
-    ${mxnet_LINKER_LIBS}
-    ${OpenCV_LIBS}
-    dmlc
-    ${pslite_LINKER_LIBS}
-    )
-else()
-    message(WARNING "OpenCV_VERSION_MAJOR: ${OpenCV_VERSION_MAJOR}, version 3 with imgcodecs \
-    is required for im2rec, im2rec will not be available")
-endif()
+#if(USE_OPENCV AND OpenCV_VERSION_MAJOR GREATER 2)
+#  add_executable(im2rec "tools/im2rec.cc")
+#  if(MSVC)
+#    target_link_libraries(im2rec mxnet)
+#  else()
+#    target_link_libraries(im2rec ${BEGIN_WHOLE_ARCHIVE} mxnet_static ${END_WHOLE_ARCHIVE})
+#  endif()
+#  target_link_libraries(im2rec
+#    ${mxnet_LINKER_LIBS}
+#    ${OpenCV_LIBS}
+#    dmlc
+#    ${pslite_LINKER_LIBS}
+#    )
+#else()
+#    message(WARNING "OpenCV_VERSION_MAJOR: ${OpenCV_VERSION_MAJOR}, version 3 with imgcodecs \
+#    is required for im2rec, im2rec will not be available")
+#endif()
 
 target_link_libraries(mxnet PUBLIC dmlc)
 

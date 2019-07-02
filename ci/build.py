@@ -150,8 +150,8 @@ def build_docker(platform: str, docker_binary: str, registry: str, num_retries: 
            "--build-arg", "GROUP_ID={}".format(os.getgid())]
     if no_cache:
         cmd.append("--no-cache")
-    elif registry:
-        cmd.extend(["--cache-from", tag])
+#    elif registry:
+#        cmd.extend(["--cache-from", tag])
     cmd.extend(["-t", tag, get_dockerfiles_path()])
 
     @retry(subprocess.CalledProcessError, tries=num_retries)

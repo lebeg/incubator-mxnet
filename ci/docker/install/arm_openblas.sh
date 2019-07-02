@@ -19,11 +19,11 @@
 
 set -ex
 
-git clone --recursive -b v0.2.20 https://github.com/xianyi/OpenBLAS.git
+git clone --recursive -b v0.3.6 https://github.com/xianyi/OpenBLAS.git
 
 cd OpenBLAS
 make -j$(nproc)
-PREFIX=${CROSS_ROOT} make install
+make PREFIX=${CROSS_ROOT}/${CROSS_TRIPLE} install
 
 cd ..
 
